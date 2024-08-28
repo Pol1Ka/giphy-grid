@@ -1,50 +1,48 @@
 # React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Giphy Grid App
 
-Currently, two official plugins are available:
+This is a responsive React application that retrieves and showcases trending GIFs from the Giphy API in a grid view. Users can search for specific GIFs, view them in a modal, and navigate the app using keyboard controls. The application is developed using React, Vite, React Query, styled-components, and TypeScript.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- Fetch and display trending GIFs using the Giphy API.
+- Search for specific GIFs using a debounced query.
+- Responsive grid layout with dynamically adjusting columns.
+- Smooth transitions when opening and closing the modal.
+- Keyboard navigation and focus management for accessibility.
+- Screen reader compatibility with ARIA attributes.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Install the dependencies
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```bash
+npm install
+# or
+pnpm install
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Create a .env file in the root directory and add your Giphy API key:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+```bash
+VITE_GIPHY_API_KEY=your_api_key_here
+```
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+## Running the App
+
+To start the development server, run:
+
+```bash
+npm run dev
+# or
+pnpm dev
+```
+
+## Testing
+
+To run the tests, use:
+
+```bash
+npm run test
+# or
+pnpm test
 ```
