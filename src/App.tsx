@@ -1,24 +1,26 @@
+// App.tsx
 import React, { useState } from 'react'
+
 import { useGifs } from './useGifs'
 import Grid from './Grid'
 import Modal from './Modal'
+import SearchBar from './SearchBar'
 import { Gif } from './types'
+import useSearch from './useSearch'
 
 const App: React.FC = () => {
-  const { data: gifs, isLoading } = useGifs()
+  const { searchQuery, handleSearch } = useSearch()
+  const { data: gifs, isLoading } = useGifs(searchQuery)
   const [selectedGif, setSelectedGif] = useState<Gif | null>(null)
 
-  if (isLoading) {
-    return <div>Loading...</div>
-  }
-
   return (
-    <>
-      {gifs && <Grid gifs={gifs} onClick={setSelectedGif} />}
+    <div>
+      <SearchBar searchQuery={searchQuery} onSearch={handleSearch} />
+      <Grid gifs={gifs} onClick={setSelectedGif} isLoading={isLoading} />
       {selectedGif && (
         <Modal gif={selectedGif} onClose={() => setSelectedGif(null)} />
       )}
-    </>
+    </div>
   )
 }
 

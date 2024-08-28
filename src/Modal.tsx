@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import { Gif } from './types'
 
@@ -47,12 +47,41 @@ const CloseButton = styled.button`
   border: none;
   font-size: 18px;
   cursor: pointer;
+  aria-label: 'Close modal'; // Add aria-label for screen readers
 `
 
 const Modal: React.FC<ModalProps> = ({ gif, onClose }) => {
+  const modalRef = useRef<HTMLDivElement>(null)
+  const lastFocusedElementRef = useRef<HTMLElement | null>(null)
+
+  useEffect(() => {
+    lastFocusedElementRef.current = document.activeElement as HTMLElement
+
+    if (modalRef.current) {
+      modalRef.current.focus()
+    }
+
+    return () => {
+      if (lastFocusedElementRef.current) {
+        lastFocusedElementRef.current.focus()
+      }
+    }
+  }, [])
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Escape') {
+      onClose()
+    }
+  }
+
   return (
-    <ModalOverlay onClick={onClose}>
-      <ModalContent onClick={(e) => e.stopPropagation()}>
+    <ModalOverlay onClick={onClose} aria-modal="true">
+      <ModalContent
+        ref={modalRef}
+        tabIndex={-1}
+        onKeyDown={handleKeyDown}
+        onClick={(e) => e.stopPropagation()}
+      >
         <CloseButton onClick={onClose}>X</CloseButton>
         <ModalImage src={gif.images.original.url} alt={gif.title} />
         <ModalTitle>{gif.title}</ModalTitle>
