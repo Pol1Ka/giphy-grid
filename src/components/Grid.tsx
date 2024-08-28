@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
-import { Gif } from './types'
+import { Gif } from '../types'
 
 interface GridProps {
   gifs?: Gif[]
@@ -40,7 +40,7 @@ const Title = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.7);
   color: white;
   font-size: 14px;
   text-align: center;
@@ -102,7 +102,7 @@ const Grid: React.FC<GridProps> = ({ gifs, onClick, isLoading }) => {
           onClick={() => onClick(gif)}
           onKeyDown={(event) => handleKeyDown(event, gif)}
         >
-          <Image src={gif.images.original.url} alt={gif.title} />
+          <Image src={gif.images.original.url} />
           <Title>{gif.title}</Title>
         </GridItem>
       ))}

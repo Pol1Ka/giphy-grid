@@ -1,12 +1,13 @@
 // App.tsx
 import React, { useState } from 'react'
 
-import { useGifs } from './useGifs'
-import Grid from './Grid'
-import Modal from './Modal'
-import SearchBar from './SearchBar'
+import { useGifs } from './components/useGifs'
+import Grid from './components/Grid'
+import Modal from './components/Modal'
+import SearchBar from './components/SearchBar'
+import useSearch from './components/useSearch'
+
 import { Gif } from './types'
-import useSearch from './useSearch'
 
 const App: React.FC = () => {
   const { searchQuery, handleSearch } = useSearch()

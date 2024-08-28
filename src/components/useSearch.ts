@@ -2,7 +2,12 @@ import { useState, useEffect, useCallback } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { debounce } from 'lodash'
 
-const useSearch = (initialQuery = '') => {
+const useSearch = (
+  initialQuery = '',
+): {
+  searchQuery: string
+  handleSearch: (query: string) => void
+} => {
   const [searchParams, setSearchParams] = useSearchParams()
   const queryParam = searchParams.get('query') || initialQuery
   const [searchQuery, setSearchQuery] = useState(queryParam)
@@ -15,6 +20,7 @@ const useSearch = (initialQuery = '') => {
     }
   }, [searchQuery, setSearchParams])
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleSearch = useCallback(
     debounce((query: string) => {
       setSearchQuery(query)

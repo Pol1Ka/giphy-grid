@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import styled from 'styled-components'
-import { Gif } from './types'
+import { Gif } from '../types'
 
 interface ModalProps {
   gif: Gif
@@ -47,7 +47,7 @@ const CloseButton = styled.button`
   border: none;
   font-size: 18px;
   cursor: pointer;
-  aria-label: 'Close modal'; // Add aria-label for screen readers
+  aria-label: 'Close modal';
 `
 
 const Modal: React.FC<ModalProps> = ({ gif, onClose }) => {
@@ -75,10 +75,12 @@ const Modal: React.FC<ModalProps> = ({ gif, onClose }) => {
   }
 
   return (
-    <ModalOverlay onClick={onClose} aria-modal="true">
+    <ModalOverlay onClick={onClose}>
       <ModalContent
         ref={modalRef}
         tabIndex={-1}
+        role="dialog"
+        aria-modal="true"
         onKeyDown={handleKeyDown}
         onClick={(e) => e.stopPropagation()}
       >

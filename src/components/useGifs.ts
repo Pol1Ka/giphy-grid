@@ -1,8 +1,8 @@
 import { useQuery } from 'react-query'
 import axios from 'axios'
-import { Gif } from './types'
+import { Gif } from '../types'
 
-const API_KEY = '2vVTTOTDCPYTJrOaX3XXoYf4q7CVe0jG'
+const API_KEY = import.meta.env.VITE_GIPHY_API_KEY
 
 const fetchGifs = async (query: string) => {
   const url = query
